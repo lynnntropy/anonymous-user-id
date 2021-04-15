@@ -1,13 +1,16 @@
 import * as blake3 from 'blake3';
 import { formatISO } from 'date-fns';
 
+const hash = (input: blake3.HashInput): string =>
+  blake3.hash(input).toString('hex');
+
 export const getAnonymousUserId = (
   salt: string,
   domain: string,
   ip: string,
   userAgent: string
 ): string => {
-  return blake3.hash(`${salt}|${domain}|${ip}|${userAgent}`).toString('hex');
+  return hash(`${salt}|${domain}|${ip}|${userAgent}`);
 };
 
 export const getAnonymousUserIdWithSecret = (
@@ -17,9 +20,7 @@ export const getAnonymousUserIdWithSecret = (
   userAgent: string
 ): string =>
   getAnonymousUserId(
-    blake3
-      .hash(`${secret}/${formatISO(new Date(), { representation: 'date' })}`)
-      .toString('hex'),
+    hash(`${secret}/${formatISO(new Date(), { representation: 'date' })}`),
     domain,
     ip,
     userAgent
