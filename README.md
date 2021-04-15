@@ -1,6 +1,9 @@
 # anonymous-user-id
 
+![npm](https://img.shields.io/npm/v/anonymous-user-id)
+![node-current](https://img.shields.io/node/v/anonymous-user-id)
 [![CI](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml/badge.svg)](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml)
+![GitHub](https://img.shields.io/github/license/omegavesko/anonymous-user-id)
 
 `anonymous-user-id` is a JavaScript library that allows you to anonymously identify unique users on your website without requiring them to store (and consent to) a tracking cookie. Instead, we generate a unique ID for each user based on information we can pull out of a regular HTTP request, mainly the source IP address and `User-Agent` header.
 
