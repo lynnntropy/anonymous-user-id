@@ -1,103 +1,74 @@
-# TSDX User Guide
+# anonymous-user-id
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+[![CI](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml/badge.svg)](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml)
 
-> This TSDX setup is meant for developing libraries (not apps!) that can be published to NPM. If you’re looking to build a Node app, you could use `ts-node-dev`, plain `ts-node`, or simple `tsc`.
+`anonymous-user-id` is a JavaScript library that allows you to anonymously identify unique users on your website without requiring them to store (and consent to) a tracking cookie. Instead, we generate a unique ID for each user based on information we can pull out of a regular HTTP request, mainly the source IP address and `User-Agent` header.
 
-> If you’re new to TypeScript, checkout [this handy cheatsheet](https://devhints.io/typescript)
+The method we use to do this is heavily inspired by [Plausible Analytics](https://plausible.io/data-policy#how-we-count-unique-users-without-cookies), with [BLAKE3](https://github.com/BLAKE3-team/BLAKE3) as the hash function.
 
-## Commands
+## Supported Algorithms
 
-TSDX scaffolds your new library inside `/src`.
+- `hash(salt + domain + ip + user_agent)` - This is the same algorithm used by Plausible Analytics. It relies on a salt you need to rotate at least once a day, preventing you (or anyone else) from tracking the actions of a single user for longer than the lifespan of a single salt.
 
-To run TSDX, use:
+- `hash(hash(secret + date) + domain + ip + user_agent)` - This is a modified (and less secure) variant of the original algorithm, meant for apps that can't reliably keep state (such as serverless functions), preventing them from storing a salt. Instead, we generate the salt from a long-lived secret (which you can set as e.g. an environment variable) and the current date.
+
+## Getting Started
+
+### Prerequisites
+
+- Node >= 10 (if using in Node)
+
+### Installing
+
+npm:
 
 ```bash
-npm start # or yarn start
+npm i anonymous-user-id
 ```
 
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
+yarn:
 
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle Analysis
-
-[`size-limit`](https://github.com/ai/size-limit) is set up to calculate the real cost of your library with `npm run size` and visualize the bundle with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
+```bash
+yarn add anonymous-user-id
 ```
 
-### Rollup
+## Usage
 
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
+For each algorithm we support, we export a function you can use to generate an ID with it.
 
-### TypeScript
+- `getAnonymousUserId(salt: string, request: RequestDetails)` - implements `hash(salt + domain + ip + user_agent)`
 
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
+- `getAnonymousUserIdWithSecret(secret: string, request: RequestDetails)` - implements `hash(hash(secret + date) + domain + ip + user_agent)`
 
-## Continuous Integration
+### Example
 
-### GitHub Actions
+```typescript
+import {
+  getAnonymousUserId,
+  getAnonymousUserIdWithSecret,
+} from 'anonymous-user-id';
 
-Two actions are added by default:
+const requestDetails = {
+  domain: 'test.test',
+  ip: '1.1.1.1',
+  userAgent: 'test/1.0',
+};
 
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
+const id1 = getAnonymousUserId('salt', requestDetails);
+const id2 = getAnonymousUserIdWithSecret('secret', requestDetails);
 ```
 
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
+## Contributing
 
-## Module Formats
+If you have Docker and Docker Compose installed, you can run `docker-compose up` to immediately get a working development environment for this package, with Jest running the tests in watch mode.
 
-CJS, ESModules, and UMD module formats are supported.
+You can also use `yarn link` to use your local version of the package in a different project.
 
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
+## Authors
 
-## Named Exports
+- **Veselin Romić (omegavesko@gmail.com)**
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+## License
 
-## Including Styles
-
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
-
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
-
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE)
+file for details.
