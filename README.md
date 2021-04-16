@@ -1,9 +1,9 @@
 # anonymous-user-id
 
-[![npm](https://img.shields.io/npm/v/anonymous-user-id)](https://www.npmjs.com/package/anonymous-user-id)
 [![CI](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml/badge.svg)](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/bb0558aa4570b525ef1d/test_coverage)](https://codeclimate.com/github/omegavesko/anonymous-user-id/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/bb0558aa4570b525ef1d/maintainability)](https://codeclimate.com/github/omegavesko/anonymous-user-id/maintainability)
+[![npm](https://img.shields.io/npm/v/anonymous-user-id)](https://www.npmjs.com/package/anonymous-user-id)
 [![node-current](https://img.shields.io/node/v/anonymous-user-id)](package.json)
 [![GitHub](https://img.shields.io/github/license/omegavesko/anonymous-user-id)](LICENSE)
 
