@@ -29,7 +29,7 @@ jobs:
         run: yarn test --ci --coverage --maxWorkers=2
 
       - name: Publish code coverage
-        if: github.ref == 'refs/heads/main'
+        if: ${{ github.ref == 'refs/heads/main' && matrix.node == '14.x' && matrix.os == 'ubuntu-latest' }}
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
