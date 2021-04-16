@@ -55,7 +55,7 @@
     "typescript": "^4.2.4"
   },
   "dependencies": {
-    "blake3": "^2.1.4",
+    "blakejs": "^1.1.0",
     "date-fns": "^2.21.1"
   },
   "publishConfig": {
