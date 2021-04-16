@@ -31,6 +31,8 @@ jobs:
       - name: Publish code coverage
         if: github.ref == 'refs/heads/main'
         uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
       - name: Build
         run: yarn build
