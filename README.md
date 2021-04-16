@@ -5,7 +5,7 @@
 [![CI](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml/badge.svg)](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml)
 ![GitHub](https://img.shields.io/github/license/omegavesko/anonymous-user-id)
 
-`anonymous-user-id` is a JavaScript library that allows you to anonymously identify unique users on your website without requiring them to store (and consent to) a tracking cookie. Instead, we generate a unique ID for each user based on information we can pull out of a regular HTTP request, mainly the source IP address and `User-Agent` header.
+`anonymous-user-id` is a JavaScript library that allows you to anonymously identify unique users on your website without requiring them to store (and consent to) a tracking cookie. Instead, we generate a unique ID for each user based on information that can be pulled out of a regular HTTP request, mainly the source IP address and `User-Agent` header.
 
 The method we use to do this is heavily inspired by [Plausible Analytics](https://plausible.io/data-policy#how-we-count-unique-users-without-cookies), with [BLAKE3](https://github.com/BLAKE3-team/BLAKE3) as the hash function.
 
@@ -37,7 +37,7 @@ yarn add anonymous-user-id
 
 ## Usage
 
-For each algorithm we support, we export a function you can use to generate an ID with it.
+For each algorithm this package supports, it exports a function you can use to generate an ID with it.
 
 - `getAnonymousUserId(salt: string, request: RequestDetails)` 
   - implements `hash(salt + domain + ip + user_agent)`
