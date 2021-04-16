@@ -38,11 +38,11 @@
   "size-limit": [
     {
       "path": "dist/anonymous-user-id.cjs.production.min.js",
-      "limit": "10 KB"
+      "limit": "30 KB"
     },
     {
       "path": "dist/anonymous-user-id.esm.js",
-      "limit": "10 KB"
+      "limit": "30 KB"
     }
   ],
   "devDependencies": {
