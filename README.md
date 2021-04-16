@@ -7,7 +7,7 @@
 
 `anonymous-user-id` is a JavaScript library that allows you to anonymously identify unique users on your website without requiring them to store (and consent to) a tracking cookie. Instead, we generate a unique ID for each user based on information that can be pulled out of a regular HTTP request, mainly the source IP address and `User-Agent` header.
 
-The method we use to do this is heavily inspired by [Plausible Analytics](https://plausible.io/data-policy#how-we-count-unique-users-without-cookies), with [BLAKE3](https://github.com/BLAKE3-team/BLAKE3) as the hash function.
+The method we use to do this is heavily inspired by [Plausible Analytics](https://plausible.io/data-policy#how-we-count-unique-users-without-cookies), with [BLAKE2s](https://tools.ietf.org/html/rfc7693) as the hash function.
 
 ## Supported Algorithms
 
