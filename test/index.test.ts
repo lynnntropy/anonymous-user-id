@@ -12,7 +12,7 @@ test('getAnonymousUserId', () => {
       ip: '1.1.1.1',
       userAgent: 'test/1.0',
     })
-  ).toEqual('596837e254826733d2078f28beb170c7487c35685dfdbd7d60fe73623a257ef7');
+  ).toEqual('7a7a88b65404da1983bff9f57c27f4449f7f0d3a68f526f65fb57ab958e09bfc');
 });
 
 test('getAnonymousUserIdWithSecret', () => {
@@ -22,5 +22,5 @@ test('getAnonymousUserIdWithSecret', () => {
       ip: '1.1.1.1',
       userAgent: 'test/1.0',
     })
-  ).toEqual('aa322ee77d60c096af65b37d7f73a1a2df6252dcf2d4a5a6464c93ca40bece78');
+  ).toEqual('6f3dd1b774fd27004d890d12150ffa5a793d2d7d68d631478de4e307897eee17');
 });

@@ -1,4 +1,4 @@
-import * as blake3 from 'blake3';
+import { blake2sHex } from 'blakejs';
 import { formatISO } from 'date-fns';
 
 interface RequestDetails {
@@ -7,8 +7,7 @@ interface RequestDetails {
   userAgent?: string;
 }
 
-const hash = (input: blake3.HashInput): string =>
-  blake3.hash(input).toString('hex');
+const hash = (input: string): string => blake2sHex(input);
 
 /**
  * Get a standard anonymous user ID (hash(salt + domain + ip + user_agent)),
