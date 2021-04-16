@@ -28,5 +28,9 @@ jobs:
       - name: Test
         run: yarn test --ci --coverage --maxWorkers=2
 
+      - name: Publish code coverage
+        if: github.ref == 'refs/heads/master'
+        uses: paambaati/codeclimate-action@v2.7.5
+
       - name: Build
         run: yarn build
