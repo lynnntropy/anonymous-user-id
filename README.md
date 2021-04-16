@@ -39,9 +39,11 @@ yarn add anonymous-user-id
 
 For each algorithm we support, we export a function you can use to generate an ID with it.
 
-- `getAnonymousUserId(salt: string, request: RequestDetails)` - implements `hash(salt + domain + ip + user_agent)`
+- `getAnonymousUserId(salt: string, request: RequestDetails)` 
+  - implements `hash(salt + domain + ip + user_agent)`
 
-- `getAnonymousUserIdWithSecret(secret: string, request: RequestDetails)` - implements `hash(hash(secret + date) + domain + ip + user_agent)`
+- `getAnonymousUserIdWithSecret(secret: string, request: RequestDetails)` 
+  - implements `hash(hash(secret + date) + domain + ip + user_agent)`
 
 ### Example
 
