@@ -1,9 +1,9 @@
 # anonymous-user-id
 
-![npm](https://img.shields.io/npm/v/anonymous-user-id)
-![node-current](https://img.shields.io/node/v/anonymous-user-id)
+[![npm](https://img.shields.io/npm/v/anonymous-user-id)](https://www.npmjs.com/package/anonymous-user-id)
+[![node-current](https://img.shields.io/node/v/anonymous-user-id)](package.json)
 [![CI](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml/badge.svg)](https://github.com/omegavesko/anonymous-user-id/actions/workflows/main.yml)
-![GitHub](https://img.shields.io/github/license/omegavesko/anonymous-user-id)
+[![GitHub](https://img.shields.io/github/license/omegavesko/anonymous-user-id)](LICENSE)
 
 `anonymous-user-id` is a JavaScript library that allows you to anonymously identify unique users on your website without requiring them to store (and consent to) a tracking cookie. Instead, we generate a unique ID for each user based on information that can be pulled out of a regular HTTP request, mainly the source IP address and `User-Agent` header.
 
@@ -39,10 +39,11 @@ yarn add anonymous-user-id
 
 For each algorithm this package supports, it exports a function you can use to generate an ID with it.
 
-- `getAnonymousUserId(salt: string, request: RequestDetails)` 
+- `getAnonymousUserId(salt: string, request: RequestDetails)`
+
   - implements `hash(salt + domain + ip + user_agent)`
 
-- `getAnonymousUserIdWithSecret(secret: string, request: RequestDetails)` 
+- `getAnonymousUserIdWithSecret(secret: string, request: RequestDetails)`
   - implements `hash(hash(secret + date) + domain + ip + user_agent)`
 
 ### Example
